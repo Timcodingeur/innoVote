@@ -31,7 +31,7 @@ Cette application de vote est conçue pour faciliter la gestion des votes lors d
 - **Restriction d'Email** : Dans vos présentation vous pouver choisir d'accepter seulement certain type d'email (pour voir mettre par exeple uniquement celui de votre entreprise)
 
 ## Installation
-### Si vous avez docker
+
 1. Clonez ce dépôt sur votre machine locale :
    ```bash
    git clone https://github.com/Timcodingeur/innoVote
@@ -39,7 +39,8 @@ Cette application de vote est conçue pour faciliter la gestion des votes lors d
 2. Accédez au répertoire du projet :
    ```bash
    cd innoVote
-   ```
+      ```
+### Si vous avez docker
 3. Lancer l'app avec docker :
    ```bash
    docker-compose up
