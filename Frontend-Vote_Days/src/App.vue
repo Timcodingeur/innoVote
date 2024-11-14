@@ -1,26 +1,22 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import {useRouter} from 'vue-router'
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import Menu from './components/Menu.vue';
 
-const router = useRouter();
+const route = useRoute();
 
-/**
- * 
- */
- function GoToLogin()
-{
-  router.push({name: 'logs'});
-}
+const showMenu = computed(() => {
+  return route.meta.showMenu !== false;
+});
 </script>
 
 <template>
-  <header>
-    <button v-on:click="GoToLogin">Login page</button>
+  <header class="header">
+    <div>
+      <Menu v-if="showMenu"></Menu>
+    </div>
   </header>
-
-  <main>
-  </main>
+  <router-view></router-view>
 </template>
 
 <style scoped>

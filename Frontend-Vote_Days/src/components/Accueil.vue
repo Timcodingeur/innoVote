@@ -1,9 +1,13 @@
 <script setup>
+import {useRouter} from 'vue-router'
+
+const router = useRouter();
 </script>
 
 <template>
     <header>
         <h1>rien a voir ici</h1>
+        <h1>C'est la page d'accueil</h1>
     </header>
 
     <main>

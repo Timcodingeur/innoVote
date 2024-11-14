@@ -1,22 +1,34 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
-import Login from "../components/Login.vue"
-import Home from '../App.vue'
-
-const route = [
+const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: () => import('../components/Accueil.vue'),
+        meta: { showMenu: true },
     },
     {
         path: '/login',
         name: 'logs',
-        component: Login
-    }
+        component: () => import("../components/Login.vue"),
+        meta: { showMenu: true },
+    },
+    {
+    path: '/creationslide',
+    name: 'Creatlide',
+    component: () => import("../components/CreationSlide.vue"),
+    meta: { showMenu: true },
+    },
+    {
+    path: '/WatchingSlide',
+    name: 'VoteMW',
+    component: () => import("../components/VoteMomentWait.vue"),
+    meta: { showMenu: false },
+    },
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(), route
+    history: createWebHistory(import.meta.env.BASE_URL), 
+    routes
 });
 export default router
