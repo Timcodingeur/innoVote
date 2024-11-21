@@ -1,13 +1,12 @@
 import express from "express";
 import {
-  postLogin,
-  postSignup
-} from "../controllers/loginController.mjs";
+    assignRole
+} from "../controllers/roleController.mjs";
 
 
-const loginRouteur = express();
+const roleRouteur = express();
 
-loginRouteur.post("/login", postLogin)
-loginRouteur.post("/signup", postSignup)
+roleRouteur.post("/", assignRole)
 
-export { loginRouteur };
+
+export { roleRouteur };

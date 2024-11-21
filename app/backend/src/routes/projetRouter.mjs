@@ -1,13 +1,13 @@
 import express from "express";
 import {
-  postLogin,
-  postSignup
-} from "../controllers/loginController.mjs";
+    createProject,
+    getProjects
+} from "../controllers/projetController.mjs";
 
 
-const loginRouteur = express();
+const projetRouteur = express();
 
-loginRouteur.post("/login", postLogin)
-loginRouteur.post("/signup", postSignup)
+projetRouteur.post("/create", createProject)
+projetRouteur.get("/get", getProjects)
 
-export { loginRouteur };
+export { projetRouteur };

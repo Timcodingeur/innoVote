@@ -7,11 +7,11 @@ import {
 } from "../controllers/eventController.mjs";
 
 
-const loginRouteur = express();
+const eventRouteur = express();
 
-loginRouteur.post("/create", createEvent)
-loginRouteur.get("/get", getEvents)
-loginRouteur.put("/update", updateEvent)
-loginRouteur.delete("/delete", deleteEvent)
+eventRouteur.post("/create", createEvent)
+eventRouteur.get("/get", getEvents)
+eventRouteur.put("/update", updateEvent)
+eventRouteur.delete("/delete", deleteEvent)
 
-export { loginRouteur };
+export { eventRouteur };

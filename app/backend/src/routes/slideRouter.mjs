@@ -1,13 +1,13 @@
 import express from "express";
 import {
-  postLogin,
-  postSignup
-} from "../controllers/loginController.mjs";
+    createSlide,
+  viewSlide
+} from "../controllers/slideController.mjs";
 
 
-const loginRouteur = express();
+const slideRouteur = express();
 
-loginRouteur.post("/login", postLogin)
-loginRouteur.post("/signup", postSignup)
+slideRouteur.post("/create", createSlide)
+slideRouteur.post("/view",  viewSlide)
 
-export { loginRouteur };
+export { slideRouteur };

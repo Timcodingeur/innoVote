@@ -6,10 +6,10 @@ import {
 } from "../controllers/participerController.mjs";
 
 
-const loginRouteur = express();
+const participerRouteur = express();
 
-loginRouteur.post("/login", addParticipant)
-loginRouteur.post("/signup", getParticipants)
-loginRouteur.post("/signup", removeParticipant)
+participerRouteur.post("/post", addParticipant)
+participerRouteur.get("/get", getParticipants)
+participerRouteur.delete("/delete", removeParticipant)
 
-export { loginRouteur };
+export { participerRouteur };

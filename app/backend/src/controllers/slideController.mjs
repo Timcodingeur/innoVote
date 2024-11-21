@@ -1,5 +1,6 @@
 import multer from "multer"; // Pour gérer les fichiers
 import { BlobServiceClient } from "@azure/storage-blob"; // SDK Azure
+import "dotenv/config";
 import { Slide } from "../../db/sequelize.mjs";
 //exemple avec azure
 // Configuration de Multer
