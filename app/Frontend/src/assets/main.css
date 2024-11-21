@@ -1,0 +1,40 @@
+/* Styles globaux */
+body, html, #app {
+  margin-top: 8%;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Style du header */
+.header {
+  width: 100%;
+  background-color: black; /* Couleur verte pour le header */
+  color: white;
+  position: fixed; /* Fixe le header en haut */
+  top: 0;
+  left: 0;
+  padding: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style du main */
+main {
+  margin-top: 60px; /* Hauteur du header pour éviter que le contenu soit caché */
+  padding: 1rem;
+}
+
+/* Style du footer */
+footer {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed; /* Fixe le footer en bas */
+  bottom: 0;
+  left: 0;
+}
