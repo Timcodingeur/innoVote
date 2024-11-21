@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <h1>Tu te login</h1>
+    <h1>Slidy Slidou</h1>
 </template>
 
 <style scoped>
