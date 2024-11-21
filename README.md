@@ -1,5 +1,6 @@
 # innoVote
 Cette application de vote est conçue pour faciliter la gestion des votes lors d'événements de présentation, tels que des concours, des sessions de brainstorming, ou tout autre type d'événement où l'évaluation et les votes sont nécessaires. Elle permet aux utilisateurs de voter pour des présentations, de consulter un classement des participants, et d’obtenir des résultats détaillés.
+
 ## Langages, Frameworks et Outils
 
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
@@ -46,21 +47,17 @@ Cette application de vote est conçue pour faciliter la gestion des votes lors d
    docker-compose up
    ```
 ### Si vous n'avez pas docker
-3. Aller dans les deux répértoire :
-   ```bash
-   cd frontend
-   cd backend
-   ```
-4. Lancer le backend avec
+
+3. Lancer le backend avec
     ```bash
+   cd backend
    npm start
    ```
-5. Lancer le frontend avec
+4. Lancer le frontend avec
     ```bash
+   cd frontend
    npm run dev
    ```
-
-
 
 ## Utilisation
 
@@ -85,4 +82,4 @@ Ce projet est sous licence MIT. Consultez le fichier `LICENSE` pour plus d'infor
 
 ---
 
-Avec cette application de vote, vos événements seront plus interactifs et plus organisés. N'hésitez pas à nous contacter pour toute question ou suggestion !
+Avec cette application de vote, vos événements seront plus interactifs et plus organisés. 
