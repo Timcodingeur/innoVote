@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { GoToHome, GoToLogin, GoToCreationSlide } from "../Helper/GoToRoad.js"
+import { GoToHome, GoToLogin, GoToCreationSlide, GoToVotingPage } from "../Helper/GoToRoad.js"
 
 const route = useRoute();
 const router = useRouter();

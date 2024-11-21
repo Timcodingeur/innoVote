@@ -10,3 +10,7 @@ export function GoToHome(router) {
 export function GoToCreationSlide(router) {
   router.push({ name: 'Creatlide' });
 }
+
+export function GoToVotingPage(router) {
+  router.push({ name: 'VoteMW' });
+}
