@@ -8,23 +8,36 @@ export const UserModel = (sequelize, DataTypes) => {
     firstName: {
       type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        notEmpty: { msg: "Le prénom est requis." },
+      },
     },
     lastName: {
       type: DataTypes.STRING(50),
       allowNull: false,
-    },
-    surname: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
+      validate: {
+        notEmpty: { msg: "Le nom de famille est requis." },
+      },
     },
     email: {
       type: DataTypes.STRING(50),
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: { msg: "Email invalide." },
+        notEmpty: { msg: "L'email est requis." },
+      },
     },
     password: {
-      type: DataTypes.STRING(256), 
+      type: DataTypes.STRING(256),
       allowNull: false,
+      validate: {
+        notEmpty: { msg: "Le mot de passe est requis." },
+        len: {
+          args: [8, 256],
+          msg: "Le mot de passe doit comporter au moins 8 caractères.",
+        },
+      },
     },
   });
 };
