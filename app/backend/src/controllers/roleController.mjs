@@ -1,4 +1,4 @@
-import { Role } from "../../db/sequelize.mjs";
+import { Role } from "../db/sequelize.mjs";
 
 /**
  * Ajout d'un rôle à un utilisateur

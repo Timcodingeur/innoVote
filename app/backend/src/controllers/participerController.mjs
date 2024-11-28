@@ -1,4 +1,4 @@
-import { Participer } from "../../db/sequelize.mjs";
+import { Participer } from "../db/sequelize.mjs";
 
 /**
  * Ajout d'un utilisateur à un événement

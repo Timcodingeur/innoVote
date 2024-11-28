@@ -1,4 +1,4 @@
-import { Projet } from "../../db/sequelize.mjs";
+import { Projet } from "../db/sequelize.mjs";
 
 /**
  * Création d'un projet

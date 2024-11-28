@@ -6,12 +6,12 @@ export const SlideModel = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     note: {
-      type: DataTypes.STRING(2048),
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     fileUrl: {
-      type: DataTypes.STRING, 
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isUrl: { msg: "Le lien du fichier doit être une URL valide." },

@@ -12,6 +12,11 @@ export const UserModel = (sequelize, DataTypes) => {
         notEmpty: { msg: "Le prénom est requis." },
       },
     },
+    role: {
+      type: DataTypes.ENUM("invité", "créateur", "owner"),
+      allowNull: false,
+      defaultValue: "invité",
+    },
     lastName: {
       type: DataTypes.STRING(50),
       allowNull: false,

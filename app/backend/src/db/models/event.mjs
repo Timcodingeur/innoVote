@@ -13,14 +13,14 @@ export const EventModel = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    projetId: {
+    slideId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Projets", // Nom de la table associée
+        model: "Slides",
         key: "id",
       },
-      onDelete: "CASCADE", // Suppression en cascade
+      onDelete: "CASCADE",
     },
   });
 };

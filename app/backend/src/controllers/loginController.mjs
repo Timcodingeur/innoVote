@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import { User } from "../../db/sequelize.mjs";
+import { User } from "../db/sequelize.mjs";
 
 /**
  * Connexion d'un utilisateur

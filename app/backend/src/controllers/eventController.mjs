@@ -1,4 +1,4 @@
-import { Event } from "../../db/sequelize.mjs";
+import { Event } from "../db/sequelize.mjs";
 
 /**
  * Création d'un événement

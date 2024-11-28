@@ -19,14 +19,14 @@ export const ProjetModel = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
-    owner: {
+    ownerId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true, // Permettre les valeurs NULL
       references: {
-        model: "Users", // Nom de la table associée
+        model: "Users",
         key: "id",
       },
-      onDelete: "SET NULL", // Supprimer ou réassigner si l'utilisateur disparaît
+      onDelete: "SET NULL", // Conserver cette action
     },
   });
 };
