@@ -9,10 +9,6 @@ export const ChoixModel = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      nbVotant: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       description: {
         type: DataTypes.TEXT,
         allowNull: true,

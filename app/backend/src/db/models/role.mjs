@@ -18,9 +18,5 @@ export const RoleModel = (sequelize, DataTypes) => {
       },
       onDelete: "CASCADE",
     },
-    role: {
-      type: DataTypes.ENUM("membre", "propriétaire", "admin"),
-      allowNull: false,
-    },
   });
 };

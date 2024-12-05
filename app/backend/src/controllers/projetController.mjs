@@ -19,12 +19,12 @@ export const createProject = async (req, res) => {
 };
 
 /**
- * Liste des projets
+ * Récupérer toutes les présentations
  */
-export const getProjects = async (req, res) => {
+export const getProject = async (req, res) => {
   try {
-    const projects = await Projet.findAll();
-    return res.status(200).json(projects);
+    const presentations = await Projet.findAll();
+    return res.status(200).json(presentations);
   } catch (error) {
     return res.status(500).json({ message: "Erreur serveur.", error: error.message });
   }
