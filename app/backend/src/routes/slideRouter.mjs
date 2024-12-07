@@ -1,13 +1,18 @@
-import express from "express";
+import { Router } from "express";
 import {
-    createSlide,
-  viewSlide
+  getSlides,
+  createSlide,
+  getSlideById,
+  updateSlide,
+  deleteSlide
 } from "../controllers/slideController.mjs";
 
+const router = Router();
 
-const slideRouteur = express();
+router.get("/presentations/:presentationId/slides", getSlides);
+router.post("/presentations/:presentationId/slides", createSlide);
+router.get("/presentations/:presentationId/slides/:slideId", getSlideById);
+router.put("/presentations/:presentationId/slides/:slideId", updateSlide);
+router.delete("/presentations/:presentationId/slides/:slideId", deleteSlide);
 
-slideRouteur.post("/create", createSlide)
-slideRouteur.post("/view",  viewSlide)
-
-export { slideRouteur };
+export default router;

@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
 import { sequelize, initDb } from "./db/sequelize.mjs"; // Import de la base de données et initialisation
-import { loginRouteur } from "./routes/loginRouter.mjs"; // Import du routeur pour la gestion des utilisateurs
-import { eventRouteur } from "./routes/eventRouter.mjs";
-import { participerRouteur } from "./routes/participerRouter.mjs";
-import { projetRouteur } from "./routes/projetRouter.mjs";
-import { roleRouteur } from "./routes/roleRouter.mjs";
-import { slideRouteur } from "./routes/slideRouter.mjs";
+import presentationRoutes from "./routes/projetRouter.mjs";
+import slideRoutes from "./routes/slideRouter.mjs";
+import eventRoutes from "./routes/eventRouter.mjs";
+import choixRoutes from "./routes/choix.mjs";
+import userRoutes from "./routes/user.mjs";
+import authRoutes from "./routes/auth.mjs";
+import inviteRoutes from "./routes/invite.mjs";
 import "dotenv/config"; // Chargement des variables d'environnement
 
 const app = express(); // Création de l'application Express
@@ -34,14 +35,14 @@ app.get("/", (req, res) => {
   res.send("Le système est lancé");
 });
 
-
-// Utilisation du routeur pour les opérations liées aux utilisateurs (connection et création de compte)
-app.use("/api/user", loginRouteur);
-app.use("/api/event", eventRouteur);
-app.use("/api/participer", participerRouteur);
-app.use("/api/projet", projetRouteur);
-app.use("/api/role", roleRouteur);
-app.use("/api/slide", slideRouteur);
+// Montage des différentes routes sous le préfixe /api
+app.use("/api", authRoutes);
+app.use("/api", userRoutes);
+app.use("/api", presentationRoutes);
+app.use("/api", slideRoutes);
+app.use("/api", eventRoutes);
+app.use("/api", choixRoutes);
+app.use("/api", inviteRoutes);
 
 // Démarrage du serveur sur le port spécifié
 app.listen(process.env.PROJECT_PORT, () => {
@@ -53,3 +54,5 @@ app.use((req, res) => {
   const message = "Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.";
   res.status(404).json({ message });
 });
+
+export default app;

@@ -1,17 +1,18 @@
-import express from "express";
+import { Router } from "express";
 import {
-    createEvent,
-    getEvents,
-    updateEvent,
-    deleteEvent
+  getEvents,
+  createEvent,
+  getEventById,
+  updateEvent,
+  deleteEvent
 } from "../controllers/eventController.mjs";
 
+const router = Router();
 
-const eventRouteur = express();
+router.get("/presentations/:presentationId/slides/:slideId/events", getEvents);
+router.post("/presentations/:presentationId/slides/:slideId/events", createEvent);
+router.get("/presentations/:presentationId/slides/:slideId/events/:eventId", getEventById);
+router.put("/presentations/:presentationId/slides/:slideId/events/:eventId", updateEvent);
+router.delete("/presentations/:presentationId/slides/:slideId/events/:eventId", deleteEvent);
 
-eventRouteur.post("/create", createEvent)
-eventRouteur.get("/get", getEvents)
-eventRouteur.put("/update", updateEvent)
-eventRouteur.delete("/delete", deleteEvent)
-
-export { eventRouteur };
+export default router;

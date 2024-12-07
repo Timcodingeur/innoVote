@@ -28,5 +28,13 @@ export const ProjetModel = (sequelize, DataTypes) => {
       },
       onDelete: "SET NULL", // Conserver cette action
     },
+    isJoinable: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    joinCode: {
+      type: DataTypes.STRING(10),
+      allowNull: true,
+    },
   });
 };

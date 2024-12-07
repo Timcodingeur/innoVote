@@ -1,86 +1,82 @@
-import multer from "multer"; // Pour gérer les fichiers
-import { BlobServiceClient } from "@azure/storage-blob"; // SDK Azure
-import "dotenv/config";
-import { Slide } from "../db/sequelize.mjs";
-//exemple avec azure
-// Configuration de Multer
-const upload = multer({ storage: multer.memoryStorage() });
+import { Slide, Projet } from "../db/sequelize.mjs";
 
-// Initialisation du client Azure Blob Storage
-const blobServiceClient = BlobServiceClient.fromConnectionString(
-  `DefaultEndpointsProtocol=https;AccountName=${process.env.AZURE_STORAGE_ACCOUNT};AccountKey=${process.env.AZURE_STORAGE_ACCESS_KEY};EndpointSuffix=core.windows.net`
-);
-const containerClient = blobServiceClient.getContainerClient(process.env.AZURE_STORAGE_CONTAINER);
-
-/**
- * Création d'un slide avec téléversement du fichier
- */
-export const createSlide = [
-  upload.single("file"), // Middleware pour gérer le fichier
-  async (req, res) => {
-    try {
-      const { note, projetId } = req.body;
-
-      // Validation des champs
-      if (!note || !projetId || !req.file) {
-        return res.status(400).json({ message: "Note, projetId et fichier requis." });
-      }
-
-      const file = req.file;
-      const blobName = `${Date.now()}_${file.originalname}`; // Nom unique du fichier
-      const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-
-      // Téléversement vers Azure Blob Storage
-      await blockBlobClient.uploadData(file.buffer, {
-        blobHTTPHeaders: { blobContentType: file.mimetype }, // Type MIME du fichier
-      });
-
-      // URL du fichier
-      const fileUrl = blockBlobClient.url;
-
-      // Création du slide dans la base avec l'URL
-      const slide = await Slide.create({
-        note,
-        fileUrl, // Stocke l'URL générée
-        projetId,
-      });
-
-      return res.status(201).json({ message: "Slide créé avec succès.", slide });
-    } catch (error) {
-      console.error("Erreur lors de la création du slide :", error);
-      return res.status(500).json({ message: "Erreur serveur.", error: error.message });
-    }
-  },
-];
-
-/**
- * Affichage d'un slide (contenu du fichier depuis Azure Blob Storage)
- */
-export const viewSlide = async (req, res) => {
+export const getSlides = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { presentationId } = req.params;
+    const project = await Projet.findByPk(presentationId);
+    if (!project) {
+      return res.status(404).json({ message: "Présentation non trouvée." });
+    }
+    const slides = await Slide.findAll({ where: { projetId: presentationId }});
+    return res.status(200).json(slides);
+  } catch (error) {
+    return res.status(500).json({ message: "Erreur serveur.", error: error.message });
+  }
+};
 
-    // Recherche du slide dans la base
-    const slide = await Slide.findByPk(id);
+export const createSlide = async (req, res) => {
+  try {
+    const { presentationId } = req.params;
+    const { note, fileUrl } = req.body; // fileUrl peut venir d'un service externe (Azure)
+    if (!note || !fileUrl) {
+      return res.status(400).json({ message: "Note et fileUrl requis." });
+    }
+
+    const project = await Projet.findByPk(presentationId);
+    if (!project) {
+      return res.status(404).json({ message: "Présentation non trouvée." });
+    }
+
+    const slide = await Slide.create({ note, fileUrl, projetId: presentationId });
+    return res.status(201).json({ message: "Slide créé avec succès.", slide });
+  } catch (error) {
+    return res.status(500).json({ message: "Erreur serveur.", error: error.message });
+  }
+};
+
+export const getSlideById = async (req, res) => {
+  try {
+    const { presentationId, slideId } = req.params;
+    const slide = await Slide.findOne({ where: { id: slideId, projetId: presentationId } });
+    if (!slide) {
+      return res.status(404).json({ message: "Slide non trouvé." });
+    }
+    return res.status(200).json(slide);
+  } catch (error) {
+    return res.status(500).json({ message: "Erreur serveur.", error: error.message });
+  }
+};
+
+export const updateSlide = async (req, res) => {
+  try {
+    const { presentationId, slideId } = req.params;
+    const { note, fileUrl } = req.body;
+    
+    const slide = await Slide.findOne({ where: { id: slideId, projetId: presentationId } });
     if (!slide) {
       return res.status(404).json({ message: "Slide non trouvé." });
     }
 
-    // Récupération du contenu du fichier via Azure Blob Storage
-    const blobName = slide.fileUrl.split("/").pop(); // Nom du blob à partir de l'URL
-    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    if (note !== undefined) slide.note = note;
+    if (fileUrl !== undefined) slide.fileUrl = fileUrl;
 
-    // Télécharger le fichier en mémoire
-    const downloadResponse = await blockBlobClient.download(0);
-    const contentType = downloadResponse.contentType || "application/octet-stream";
-
-    // Configurer le type MIME pour l'affichage
-    res.setHeader("Content-Type", contentType);
-
-    // Streamer le fichier vers la réponse
-    downloadResponse.readableStreamBody.pipe(res);
+    await slide.save();
+    return res.status(200).json({ message: "Slide mis à jour.", slide });
   } catch (error) {
-    console.error("Erreur lors de l'ouverture du fichier :", error);
+    return res.status(500).json({ message: "Erreur serveur.", error: error.message });
+  }
+};
+
+export const deleteSlide = async (req, res) => {
+  try {
+    const { presentationId, slideId } = req.params;
+    const slide = await Slide.findOne({ where: { id: slideId, projetId: presentationId } });
+    if (!slide) {
+      return res.status(404).json({ message: "Slide non trouvé." });
+    }
+    await slide.destroy();
+    return res.status(200).json({ message: "Slide supprimé avec succès." });
+  } catch (error) {
     return res.status(500).json({ message: "Erreur serveur.", error: error.message });
   }
 };
