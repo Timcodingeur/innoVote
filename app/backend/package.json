@@ -1,5 +1,7 @@
 {
-  "name": "api-rest",
+  "name": "frontend-vote-days",
+  "version": "0.0.0",
+  "private": true,
   "type": "module",
   "version": "1.0.0",
   "description": "Une API REST",
