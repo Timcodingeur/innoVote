@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import { GoToHome, GoToLogin, GoToCreationSlide, GoToVotingPage } from "../Helper/GoToRoad.js"
+import { GoToHome, GoToLogin, GoToCreationSlide, GoToVotingPage, GoToCreationPresentation } from "../Helper/GoToRoad.js"
 
 const router = useRouter();
 </script>
@@ -17,9 +17,9 @@ const router = useRouter();
     <main>
         <section class="actions">
             <div class="action create">
-                <h3>Créer un slide</h3>
+                <h3>Créer une présentation</h3>
                 <p>Lancez votre propre présentation en quelques clics.</p>
-                <button v-on:click="GoToCreationSlide(router)">Créer</button>
+                <button v-on:click="GoToCreationPresentation(router)">Créer</button>
             </div>
             <div class="action join">
                 <h3>Rejoindre une présentation</h3>
@@ -29,11 +29,11 @@ const router = useRouter();
         </section>
 
         <section class="features">
-            <h2>Fonctionnalités principales</h2>
+            <h2>Temporaire</h2>
             <ul>
-                <li>Personnalisez vos slides</li>
-                <li>Collaborez avec d'autres utilisateurs</li>
-                <li>Accédez à des présentations dynamiques</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
             </ul>
         </section>
     </main>

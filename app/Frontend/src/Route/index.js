@@ -15,10 +15,16 @@ const routes = [
     },
     {
     path: '/creationslide',
-    name: 'Creatlide',
+    name: 'Creatslide',
     component: () => import("../components/CreationSlide.vue"),
     meta: { showMenu: true },
     },
+    {
+        path: '/creationpresentation',
+        name: 'Creatpresentation',
+        component: () => import("../components/CreationPresentation.vue"),
+        meta: { showMenu: true },
+        },
     {
     path: '/WatchingSlide',
     name: 'VoteMW',

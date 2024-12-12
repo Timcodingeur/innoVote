@@ -7,8 +7,12 @@ export function GoToHome(router) {
   router.push({ name: 'Home' });
 }
 
+export function GoToCreationPresentation(router) {
+  router.push({ name: 'Creatpresentation' });
+}
+
 export function GoToCreationSlide(router) {
-  router.push({ name: 'Creatlide' });
+  router.push({ name: 'Creatslide' });
 }
 
 export function GoToVotingPage(router) {

@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { GoToHome, GoToLogin, GoToCreationSlide, GoToVotingPage } from "../Helper/GoToRoad.js"
+import { GoToHome, GoToLogin, GoToCreationSlide, GoToVotingPage, GoToCreationPresentation } from "../Helper/GoToRoad.js"
 
 const route = useRoute();
 const router = useRouter();
@@ -20,7 +20,7 @@ const showExtraItems = computed(() => {
     <nav class="header">
         <button v-on:click="GoToHome(router)">Home</button>
         <button v-on:click="GoToLogin(router)">Login</button>
-        <button v-if="showExtraItems" v-on:click="GoToCreationSlide(router)">Create Slide</button>
+        <button v-if="showExtraItems" v-on:click="GoToCreationPresentation(router)">Create presentation</button>
     </nav>
 </template>
 
