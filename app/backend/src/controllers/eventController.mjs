@@ -48,7 +48,7 @@ export const getEventById = async (req, res) => {
 
 export const updateEvent = async (req, res) => {
   try {
-    const { presentationId, slideId, eventId } = req.params;
+    const { slideId, eventId } = req.params;
     const { type, info } = req.body;
 
     const event = await Event.findOne({ where: { id: eventId, slideId: slideId }});

@@ -1,25 +1,17 @@
-export const loginWithMSAL = async (req, res) => {
-    try {
-      const { msalToken } = req.body;
-      if (!msalToken) {
-        return res.status(400).json({ message: "Token MSAL requis." });
-      }
-  
-      // Vérifier le token MSAL via votre logique interne (bibliothèque MSAL côté serveur)
-      // Si valide, on peut éventuellement générer un JWT interne ou juste répondre "OK"
-      // Ici on fait simple :
-      const isValid = true; // Vous devrez implémenter la vraie validation.
-      
-      if (!isValid) {
-        return res.status(401).json({ message: "Token MSAL invalide." });
-      }
-  
-      // Trouver l'utilisateur en base via l'email contenu dans le token MSAL
-      // Si pas trouvé, créer un user avec rôle invité.
-      // Pour simplifier, on admet que l'utilisateur existe déjà.
-      return res.status(200).json({ message: "Connexion réussie via MSAL." });
-    } catch (error) {
-      return res.status(500).json({ message: "Erreur serveur.", error: error.message });
-    }
-  };
-  
+import authProvider from "../auth/authProvider.mjs";
+import { REDIRECT_URI, POST_LOGOUT_REDIRECT_URI } from "../auth/authConfig.mjs";
+
+// Contrôleur pour déclencher le flux de connexion MSAL
+export const signin = authProvider.login({
+  scopes: [],
+  redirectUri: REDIRECT_URI,
+  successRedirect: '/'
+});
+
+// Contrôleur pour gérer le retour de MSAL après le login
+export const handleRedirect = authProvider.handleRedirect();
+
+// Contrôleur pour la déconnexion via MSAL
+export const signout = authProvider.logout({
+  postLogoutRedirectUri: POST_LOGOUT_REDIRECT_URI
+});
