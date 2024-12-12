@@ -75,4 +75,8 @@
     background-color: #4A148C;
     transform: scale(1.05);
 }
+
+body {
+    margin-top: 0%;
+}
 </style>

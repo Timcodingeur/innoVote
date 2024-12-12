@@ -5,26 +5,26 @@ export const UserModel = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    firstName: {
+    pseudo: {
       type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        notEmpty: { msg: "Le pseudo est requis." },
+      },
     },
-    lastName: {
-      type: DataTypes.STRING(50),
+    role: {
+      type: DataTypes.ENUM("invité", "créateur", "admin"),
       allowNull: false,
-    },
-    surname: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
+      defaultValue: "invité",
     },
     email: {
       type: DataTypes.STRING(50),
       allowNull: false,
       unique: true,
-    },
-    password: {
-      type: DataTypes.STRING(256), 
-      allowNull: false,
+      validate: {
+        isEmail: { msg: "Email invalide." },
+        notEmpty: { msg: "L'email est requis." },
+      },
     },
   });
 };
